@@ -33,12 +33,12 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
 
   useEffect(() => {
     const currentElement = findDOMNode(wrapperRef.current!);
-    if (currentElement && MutationObserver) {
+    if (currentElement && 'MutationObserver' in window) {
       instance.current = new MutationObserver(onMutate);
       instance.current.observe(currentElement, options);
     }
     return destroyObserver;
-  }, []);
+  }, [options, onMutate]);
 
   if (!children) {
     if (process.env.NODE_ENV !== 'production') {
