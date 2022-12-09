@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, isValidElement, cloneElement } from 'react';
 import { supportRef } from 'rc-util/lib/ref';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
+import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import DomWrapper from './wapper';
 
 const INTERNAL_PREFIX_KEY = 'rc-mutation-observer-key';
@@ -32,6 +33,9 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
   };
 
   useEffect(() => {
+    if (!canUseDom()) {
+      return;
+    }
     const currentElement = findDOMNode(wrapperRef.current!);
     if (currentElement && 'MutationObserver' in window) {
       instance.current = new MutationObserver(onMutate);
