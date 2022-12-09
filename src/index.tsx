@@ -4,8 +4,6 @@ import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import DomWrapper from './wapper';
 
-const INTERNAL_PREFIX_KEY = 'rc-mutation-observer-key';
-
 interface MutationObserverProps {
   children: React.ReactElement;
   options?: MutationObserverInit;
@@ -21,27 +19,24 @@ const defOptions: MutationObserverInit = {
 const MutateObserver: React.FC<MutationObserverProps> = props => {
   const { children, options = defOptions, onMutate = () => {} } = props;
 
-  const instance = useRef<MutationObserver>();
-
   const wrapperRef = useRef<DomWrapper>(null);
 
   const canRef = isValidElement(children) && supportRef(children);
-
-  const destroyObserver = () => {
-    instance.current?.takeRecords();
-    instance.current?.disconnect();
-  };
 
   useEffect(() => {
     if (!canUseDom()) {
       return;
     }
+    let instance: MutationObserver;
     const currentElement = findDOMNode(wrapperRef.current!);
     if (currentElement && 'MutationObserver' in window) {
-      instance.current = new MutationObserver(onMutate);
-      instance.current.observe(currentElement, options);
+      instance = new MutationObserver(onMutate);
+      instance.observe(currentElement, options);
     }
-    return destroyObserver;
+    return () => {
+      instance?.takeRecords();
+      instance?.disconnect();
+    };
   }, [options, onMutate]);
 
   if (!children) {
@@ -52,7 +47,7 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
   }
 
   return (
-    <DomWrapper key={INTERNAL_PREFIX_KEY} ref={wrapperRef}>
+    <DomWrapper ref={wrapperRef}>
       {canRef
         ? cloneElement(children as any, { ref: (children as any).ref })
         : children}
