@@ -1,4 +1,4 @@
-# rc-portal
+# rc-mutate-observer
 
 React 18 supported Portal Component.
 
@@ -31,11 +31,21 @@ open http://localhost:8000
 
 ## Usage
 
-```js | pure
-import Portal from 'rc-portal';
+```tsx
+import React from 'react';
+import MutateObserver from './src';
 
-const Demo = () => {
-  return <Portal open>Hello World</Portal>;
+const onMutate = (mutations: MutationRecord[], observer: MutationObserver) => {
+  console.log(mutation);
+  console.log(observer);
+};
+
+const Demo: React.FC = () => {
+  return (
+    <MutateObserver onMutate={onMutate}>
+      <div>test</div>
+    </MutateObserver>
+  );
 };
 
 export default Demo;
@@ -47,8 +57,7 @@ We use typescript to create the Type definition. You can view directly in IDE. B
 
 ### Portal
 
-| Prop         | Description                        | Type                     | Default       |
-| ------------ | ---------------------------------- | ------------------------ | ------------- |
-| getContainer | Customize portal container element | Element \| () => Element | document.body |
-| open         | Show the portal                    | boolean                  | false         |
-| autoLock     | Lock screen scroll when open       | boolean                  | false         |
+| Prop     | Description                                                                                                      | Type                 | Default |
+| -------- | ---------------------------------------------------------------------------------------------------------------- | -------------------- | ------- |
+| onMutate | A function which will be called on each DOM change that qualifies given the observed node or subtree and options | MutationCallback     | -       |
+| options  | An object providing options that describe which DOM mutations should be reported to mutationObserver's callback  | MutationObserverInit | -       |
