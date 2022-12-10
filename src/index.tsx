@@ -5,7 +5,7 @@ import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import DomWrapper from './wapper';
 
 interface MutationObserverProps {
-  children: React.ReactElement;
+  children: React.ReactNode;
   options?: MutationObserverInit;
   onMutate?: (mutations: MutationRecord[], observer: MutationObserver) => void;
 }
