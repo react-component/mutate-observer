@@ -2,8 +2,8 @@
 
 exports[`StrictMode 1`] = `
 <div>
-  <button>
-    click
-  </button>
+  <div>
+    test
+  </div>
 </div>
 `;
