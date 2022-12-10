@@ -28,3 +28,13 @@ describe('MutateObserver', () => {
     unmount();
   });
 });
+
+it('StrictMode', () => {
+  const { container } = render(
+    <MutateObserver>
+      <div>test</div>
+    </MutateObserver>,
+    { wrapper: React.StrictMode },
+  );
+  expect(container).toMatchSnapshot();
+});
