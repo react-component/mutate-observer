@@ -29,12 +29,32 @@ describe('MutateObserver', () => {
   });
 });
 
-it('StrictMode', () => {
-  const { container } = render(
-    <MutateObserver>
-      <div>test</div>
-    </MutateObserver>,
-    { wrapper: React.StrictMode },
-  );
-  expect(container).toMatchSnapshot();
+it('findDOMNode should not error in React.StrictMode', () => {
+  const fn = jest.fn();
+  const buttonRef = React.createRef<HTMLButtonElement>();
+  const warnSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+  const Demo = React.forwardRef<
+    HTMLButtonElement,
+    React.HTMLAttributes<HTMLButtonElement>
+  >((props, ref) => {
+    const [flag, setFlag] = React.useState<boolean>(true);
+    return (
+      <React.StrictMode>
+        <MutateObserver onMutate={fn}>
+          <button
+            {...props}
+            ref={ref}
+            className={flag ? 'aaa' : 'bbb'}
+            onClick={() => setFlag(!flag)}
+          >
+            click
+          </button>
+        </MutateObserver>
+      </React.StrictMode>
+    );
+  });
+  const { container } = render(<Demo ref={buttonRef} />);
+  fireEvent.click(container.querySelector('button')!);
+  expect(warnSpy).not.toHaveBeenCalled();
+  warnSpy.mockRestore();
 });

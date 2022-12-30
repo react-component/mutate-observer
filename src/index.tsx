@@ -18,12 +18,21 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
 
   const canRef = React.isValidElement(children) && supportRef(children);
 
+  const originRef: React.RefObject<HTMLElement> = canRef
+    ? (children as any)?.ref
+    : null;
+
   useEffect(() => {
     if (!canUseDom()) {
       return;
     }
+
     let instance: MutationObserver;
-    const currentElement = findDOMNode(wrapperRef.current!);
+
+    const currentElement = findDOMNode(
+      originRef?.current || wrapperRef?.current,
+    );
+
     if (currentElement && 'MutationObserver' in window) {
       instance = new MutationObserver(onMutate);
       instance.observe(currentElement, options);
@@ -32,7 +41,7 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
       instance?.takeRecords();
       instance?.disconnect();
     };
-  }, [options, onMutate]);
+  }, [options, originRef, onMutate]);
 
   if (!children) {
     if (process.env.NODE_ENV !== 'production') {
