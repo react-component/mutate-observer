@@ -1,14 +1,9 @@
-import React, { useEffect, useRef, isValidElement, cloneElement } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { supportRef } from 'rc-util/lib/ref';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import DomWrapper from './wapper';
-
-interface MutationObserverProps {
-  children: React.ReactNode;
-  options?: MutationObserverInit;
-  onMutate?: (mutations: MutationRecord[], observer: MutationObserver) => void;
-}
+import type { MutationObserverProps } from './interface';
 
 const defOptions: MutationObserverInit = {
   subtree: true,
@@ -21,7 +16,7 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
 
   const wrapperRef = useRef<DomWrapper>(null);
 
-  const canRef = isValidElement(children) && supportRef(children);
+  const canRef = React.isValidElement(children) && supportRef(children);
 
   useEffect(() => {
     if (!canUseDom()) {
@@ -49,7 +44,7 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
   return (
     <DomWrapper ref={wrapperRef}>
       {canRef
-        ? cloneElement(children as any, { ref: (children as any).ref })
+        ? React.cloneElement(children as any, { ref: (children as any).ref })
         : children}
     </DomWrapper>
   );
