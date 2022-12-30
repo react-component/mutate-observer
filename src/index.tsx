@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { supportRef } from 'rc-util/lib/ref';
+import { composeRef, supportRef } from 'rc-util/lib/ref';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import DomWrapper from './wapper';
@@ -16,11 +16,16 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
 
   const wrapperRef = useRef<DomWrapper>(null);
 
+  const elementRef = React.useRef<HTMLElement>(null);
+
   const canRef = React.isValidElement(children) && supportRef(children);
 
-  const originRef: React.RefObject<HTMLElement> = canRef
-    ? (children as any)?.ref
-    : null;
+  const originRef: React.Ref<Element> = canRef ? (children as any)?.ref : null;
+
+  const mergedRef = React.useMemo<React.Ref<Element>>(
+    () => composeRef<Element>(originRef, elementRef),
+    [originRef, elementRef],
+  );
 
   useEffect(() => {
     if (!canUseDom()) {
@@ -30,7 +35,7 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
     let instance: MutationObserver;
 
     const currentElement = findDOMNode(
-      originRef?.current || wrapperRef?.current,
+      (originRef as any)?.current || wrapperRef?.current,
     );
 
     if (currentElement && 'MutationObserver' in window) {
@@ -53,7 +58,7 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
   return (
     <DomWrapper ref={wrapperRef}>
       {canRef
-        ? React.cloneElement(children as any, { ref: (children as any).ref })
+        ? React.cloneElement(children as any, { ref: mergedRef })
         : children}
     </DomWrapper>
   );

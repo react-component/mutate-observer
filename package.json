@@ -1,22 +1,22 @@
 {
-  "name": "@rc-component/portal",
-  "version": "1.0.3",
-  "description": "React Portal Component",
+  "name": "@rc-component/mutate-observer",
+  "version": "0.0.1",
+  "description": "React MutateObserver Component",
   "keywords": [
     "react",
     "react-component",
-    "react-portal"
+    "mutate-portal"
   ],
-  "homepage": "https://github.com/react-component/portal",
+  "homepage": "https://github.com/react-component/mutate-observer",
   "bugs": {
-    "url": "https://github.com/react-component/portal/issues"
+    "url": "https://github.com/react-component/mutate-observer/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/react-component/portal.git"
+    "url": "https://github.com/react-component/mutate-observer.git"
   },
   "license": "MIT",
-  "author": "smith3816@gmail.com",
+  "author": "574980606@qq.com",
   "main": "./lib/index",
   "module": "./es/index",
   "typings": "es/index.d.ts",
