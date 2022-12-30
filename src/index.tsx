@@ -3,6 +3,7 @@ import { composeRef, supportRef } from 'rc-util/lib/ref';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import DomWrapper from './wapper';
+import useEvent from 'rc-util/es/hooks/useEvent';
 import type { MutationObserverProps } from './interface';
 
 const defOptions: MutationObserverInit = {
@@ -13,6 +14,8 @@ const defOptions: MutationObserverInit = {
 
 const MutateObserver: React.FC<MutationObserverProps> = props => {
   const { children, options = defOptions, onMutate = () => {} } = props;
+
+  const callback = useEvent(onMutate);
 
   const wrapperRef = useRef<DomWrapper>(null);
 
@@ -34,19 +37,20 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
 
     let instance: MutationObserver;
 
-    const currentElement = findDOMNode(
-      (originRef as any)?.current || wrapperRef?.current,
-    );
+    const currentElement =
+      findDOMNode((originRef as any)?.current) ||
+      findDOMNode(wrapperRef?.current);
 
     if (currentElement && 'MutationObserver' in window) {
-      instance = new MutationObserver(onMutate);
+      instance = new MutationObserver(callback);
       instance.observe(currentElement, options);
     }
     return () => {
       instance?.takeRecords();
       instance?.disconnect();
     };
-  }, [options, originRef, onMutate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options, originRef]);
 
   if (!children) {
     if (process.env.NODE_ENV !== 'production') {
