@@ -5,7 +5,7 @@
   "keywords": [
     "react",
     "react-component",
-    "mutate-portal"
+    "mutate-observer"
   ],
   "homepage": "https://github.com/react-component/mutate-observer",
   "bugs": {
