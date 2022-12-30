@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { composeRef, supportRef } from 'rc-util/lib/ref';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import canUseDom from 'rc-util/lib/Dom/canUseDom';
+import useEvent from 'rc-util/lib/hooks/useEvent';
 import DomWrapper from './wapper';
-import useEvent from 'rc-util/es/hooks/useEvent';
 import type { MutationObserverProps } from './interface';
 
 const defOptions: MutationObserverInit = {
