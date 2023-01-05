@@ -1,13 +1,14 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Portal from '../src';
+import MutateObserver from '../src';
 
 describe('SSR', () => {
+  const fn = jest.fn();
   it('No Render in SSR', () => {
     renderToString(
-      <Portal open>
-        <div className="bamboo">Hello World</div>
-      </Portal>,
+      <MutateObserver onMutate={fn}>
+        <button>test</button>
+      </MutateObserver>,
     );
   });
 });
