@@ -37,7 +37,7 @@
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "start": "dumi dev",
     "test": "umi-test",
-    "test:coverage": "npm run test:client --coverage",
+    "test:coverage": "npm run test --coverage",
     "watch": "father dev"
   },
   "dependencies": {
