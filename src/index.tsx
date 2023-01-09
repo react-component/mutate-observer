@@ -3,7 +3,7 @@ import { composeRef, supportRef } from 'rc-util/lib/ref';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import useEvent from 'rc-util/lib/hooks/useEvent';
-import DomWrapper from './wapper';
+import DomWrapper from './wrapper';
 import type { MutationObserverProps } from './interface';
 
 const defOptions: MutationObserverInit = {
