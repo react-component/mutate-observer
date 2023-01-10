@@ -52,7 +52,7 @@ We use typescript to create the Type definition. You can view directly in IDE. B
 
 ### mutate-observer
 
-| Prop     | Description                         | Type                 | Default |
-| -------- | ----------------------------------- | -------------------- | ------- |
-| onMutate | A funed node or subtree and options | MutationCallback     | -       |
-| options  | An shoulback                        | MutationObserverInit | -       |
+| Prop     | Description                                                                                                      | Type                 | Default |
+| -------- | ---------------------------------------------------------------------------------------------------------------- | -------------------- | ------- |
+| onMutate | A function which will be called on each DOM change that qualifies given the observed node or subtree and options | MutationCallback     | -       |
+| options  | An object providing options that describe which DOM mutations should be reported to mutationObserver's callback  | MutationObserverInit | -       |
