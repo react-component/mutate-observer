@@ -1,4 +1,5 @@
 import React from 'react';
+import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import { supportRef, useComposeRef } from 'rc-util/lib/ref';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
 import useEvent from 'rc-util/lib/hooks/useEvent';
@@ -22,12 +23,19 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
     canRef ? (children as any).ref : null,
   );
 
-  useMutateObserver(
-    () => findDOMNode(elementRef.current) || findDOMNode(wrapperRef.current),
-    callback,
-    options,
-  );
+  const [target, setTarget] = React.useState<HTMLElement>(null);
 
+  useMutateObserver(target, callback, options);
+
+  // =========================== Effect ===========================
+  // Bind target
+  useLayoutEffect(() => {
+    setTarget(
+      findDOMNode(elementRef.current) || findDOMNode(wrapperRef.current),
+    );
+  });
+
+  // =========================== Render ===========================
   if (!children) {
     if (process.env.NODE_ENV !== 'production') {
       console.error('MutationObserver need children props');
