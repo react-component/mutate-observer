@@ -1,56 +1,32 @@
-import React, { useEffect, useRef } from 'react';
-import { composeRef, supportRef } from 'rc-util/lib/ref';
+import React from 'react';
+import { supportRef, useComposeRef } from 'rc-util/lib/ref';
 import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
-import canUseDom from 'rc-util/lib/Dom/canUseDom';
 import useEvent from 'rc-util/lib/hooks/useEvent';
 import DomWrapper from './wrapper';
 import type { MutationObserverProps } from './interface';
-
-const defOptions: MutationObserverInit = {
-  subtree: true,
-  childList: true,
-  attributeFilter: ['style', 'class'],
-};
+import useMutateObserver from './useMutateObserver';
 
 const MutateObserver: React.FC<MutationObserverProps> = props => {
-  const { children, options = defOptions, onMutate = () => {} } = props;
+  const { children, options, onMutate = () => {} } = props;
 
   const callback = useEvent(onMutate);
 
-  const wrapperRef = useRef<DomWrapper>(null);
+  const wrapperRef = React.useRef<DomWrapper>(null);
 
   const elementRef = React.useRef<HTMLElement>(null);
 
   const canRef = React.isValidElement(children) && supportRef(children);
 
-  const originRef: React.Ref<Element> = canRef ? (children as any)?.ref : null;
-
-  const mergedRef = React.useMemo<React.Ref<Element>>(
-    () => composeRef<Element>(originRef, elementRef),
-    [originRef, elementRef],
+  const mergedRef = useComposeRef(
+    elementRef,
+    canRef ? (children as any).ref : null,
   );
 
-  useEffect(() => {
-    if (!canUseDom()) {
-      return;
-    }
-
-    let instance: MutationObserver;
-
-    const currentElement =
-      findDOMNode((originRef as any)?.current) ||
-      findDOMNode(wrapperRef?.current);
-
-    if (currentElement && 'MutationObserver' in window) {
-      instance = new MutationObserver(callback);
-      instance.observe(currentElement, options);
-    }
-    return () => {
-      instance?.takeRecords();
-      instance?.disconnect();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options, originRef]);
+  useMutateObserver(
+    () => findDOMNode(elementRef.current) || findDOMNode(wrapperRef.current),
+    callback,
+    options,
+  );
 
   if (!children) {
     if (process.env.NODE_ENV !== 'production') {
