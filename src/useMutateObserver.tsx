@@ -32,6 +32,5 @@ export default function useMutateObserver(
       instance?.takeRecords();
       instance?.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options]);
+  }, [options, nodeOrList]);
 }
