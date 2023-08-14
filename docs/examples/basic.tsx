@@ -1,12 +1,12 @@
 import MutateObserver from '../../src';
-import React, { useCallback } from 'react';
+import React from 'react';
 
 const App: React.FC = () => {
   const [flag, setFlag] = React.useState<boolean>(true);
 
-  const onMutate = useCallback((mutations: MutationRecord[]) => {
+  const onMutate = (mutations: MutationRecord[]) => {
     console.log(mutations);
-  }, []);
+  };
 
   return (
     <MutateObserver onMutate={onMutate}>
