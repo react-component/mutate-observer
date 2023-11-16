@@ -26,7 +26,7 @@ open http://localhost:8000
 
 ## Usage
 
-```tsx
+```tsx | pure
 import React from 'react';
 import MutateObserver from './src';
 

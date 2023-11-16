@@ -1,5 +1,7 @@
 ---
-title: rc-mutate-observer
+hero:
+  title: rc-mutate-observer
+  description: React Mutate Observer Component
 ---
 
 <embed src="../README.md"></embed>
