@@ -1,11 +1,10 @@
-import React from 'react';
+import useEvent from 'rc-util/lib/hooks/useEvent';
 import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import { supportRef, useComposeRef } from 'rc-util/lib/ref';
-import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
-import useEvent from 'rc-util/lib/hooks/useEvent';
-import DomWrapper from './wrapper';
+import React from 'react';
 import type { MutationObserverProps } from './interface';
 import useMutateObserver from './useMutateObserver';
+import DomWrapper from './wrapper';
 
 const MutateObserver: React.FC<MutationObserverProps> = props => {
   const { children, options, onMutate = () => {} } = props;
@@ -23,17 +22,15 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
     canRef ? (children as any).ref : null,
   );
 
-  const [target, setTarget] = React.useState<HTMLElement>(null);
+  const [target, setTarget] = React.useState<HTMLElement | DomWrapper>(null);
 
-  useMutateObserver(target, callback, options);
+  useMutateObserver(target as HTMLElement, callback, options);
 
   // =========================== Effect ===========================
   // Bind target
   useLayoutEffect(() => {
-    setTarget(
-      findDOMNode(elementRef.current) || findDOMNode(wrapperRef.current),
-    );
-  });
+    setTarget(elementRef?.current || wrapperRef?.current);
+  }, []);
 
   // =========================== Render ===========================
   if (!children) {

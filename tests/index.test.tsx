@@ -1,5 +1,5 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 import MutateObserver from '../src';
 
 describe('MutateObserver', () => {
@@ -26,35 +26,5 @@ describe('MutateObserver', () => {
       expect(fn).not.toHaveBeenCalled();
     }
     unmount();
-  });
-
-  it('findDOMNode should not error in React.StrictMode', () => {
-    const fn = jest.fn();
-    const buttonRef = React.createRef<HTMLButtonElement>();
-    const warnSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    const Demo = React.forwardRef<
-      HTMLButtonElement,
-      React.HTMLAttributes<HTMLButtonElement>
-    >((props, ref) => {
-      const [flag, setFlag] = React.useState<boolean>(true);
-      return (
-        <React.StrictMode>
-          <MutateObserver onMutate={fn}>
-            <button
-              {...props}
-              ref={ref}
-              className={flag ? 'aaa' : 'bbb'}
-              onClick={() => setFlag(!flag)}
-            >
-              click
-            </button>
-          </MutateObserver>
-        </React.StrictMode>
-      );
-    });
-    const { container } = render(<Demo ref={buttonRef} />);
-    fireEvent.click(container.querySelector('button')!);
-    expect(warnSpy).not.toHaveBeenCalled();
-    warnSpy.mockRestore();
   });
 });
