@@ -1,5 +1,5 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 import MutateObserver from '../src';
 
 describe('MutateObserver', () => {
@@ -19,7 +19,11 @@ describe('MutateObserver', () => {
       );
     };
     const { container, unmount } = render(<Demo />);
+
+    // Simulate a click event
     fireEvent.click(container.querySelector('button')!);
+
+    // Check if the callback was triggered
     if ('MutationObserver' in window) {
       expect(fn).toHaveBeenCalled();
     } else {
@@ -28,10 +32,13 @@ describe('MutateObserver', () => {
     unmount();
   });
 
-  it('findDOMNode should not error in React.StrictMode', () => {
+  it('MutateObserver should work without errors in React.StrictMode', () => {
     const fn = jest.fn();
     const buttonRef = React.createRef<HTMLButtonElement>();
+
+    // Mock console.error to ensure no warnings are logged
     const warnSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
     const Demo = React.forwardRef<
       HTMLButtonElement,
       React.HTMLAttributes<HTMLButtonElement>
@@ -52,9 +59,16 @@ describe('MutateObserver', () => {
         </React.StrictMode>
       );
     });
+
     const { container } = render(<Demo ref={buttonRef} />);
+
+    // Simulate a click event
     fireEvent.click(container.querySelector('button')!);
+
+    // Ensure no warnings were logged
     expect(warnSpy).not.toHaveBeenCalled();
+
+    // Restore original console.error
     warnSpy.mockRestore();
   });
 });
