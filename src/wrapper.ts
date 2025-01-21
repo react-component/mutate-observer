@@ -1,10 +1,6 @@
 import React from 'react';
 
-interface DomWrapperProps {
-  children: React.ReactNode;
-}
-
-class DomWrapper extends React.Component<DomWrapperProps> {
+class DomWrapper extends React.Component<React.PropsWithChildren> {
   render() {
     return this.props.children;
   }
