@@ -1,6 +1,6 @@
 {
   "name": "@rc-component/mutate-observer",
-  "version": "2.0.0",
+  "version": "2.0.0-0",
   "description": "React MutateObserver Component",
   "keywords": [
     "react",
@@ -34,7 +34,7 @@
     "lint:tsc": "tsc -p tsconfig.json --noEmit",
     "now-build": "npm run docs:build",
     "prepare": "dumi setup",
-    "prepublishOnly": "npm run compile && np --no-cleanup --yolo --no-publish",
+    "prepublishOnly": "npm run compile && rc-np",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "start": "dumi dev",
     "test": "umi-test",
@@ -42,12 +42,12 @@
     "watch": "father dev"
   },
   "dependencies": {
-    "@babel/runtime": "^7.18.0",
     "@rc-component/util": "^1.2.0",
     "classnames": "^2.3.2"
   },
   "devDependencies": {
-    "@rc-component/father-plugin": "^1.0.0",
+    "@rc-component/father-plugin": "^2.0.2",
+    "@rc-component/np": "^1.0.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.0",
     "@types/jest": "^26.0.20",
@@ -63,7 +63,6 @@
     "father": "^4.0.0",
     "gh-pages": "^3.1.0",
     "glob": "^10.0.0",
-    "np": "^5.0.3",
     "prettier": "^2.1.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
