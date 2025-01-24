@@ -2,7 +2,19 @@ import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import MutateObserver from '../src';
 
+jest.mock('../src/useMutateObserver', () => {
+  const origin = jest.requireActual('../src/useMutateObserver').default;
+  return (...args) => {
+    global.mutateTargetElement = args[0];
+    return origin(...args);
+  };
+});
+
 describe('MutateObserver', () => {
+  beforeEach(() => {
+    global.mutateTargetElement = null;
+  });
+
   it('MutateObserver should support onMutate', () => {
     const fn = jest.fn();
     const Demo: React.FC = () => {
@@ -70,5 +82,30 @@ describe('MutateObserver', () => {
 
     // Restore original console.error
     warnSpy.mockRestore();
+  });
+
+  it('should support nativeElement', () => {
+    const Demo = React.forwardRef<
+      {
+        nativeElement: HTMLElement;
+      },
+      object
+    >((props, ref) => {
+      const eleRef = React.useRef<HTMLDivElement>(null);
+      React.useImperativeHandle(ref, () => ({
+        nativeElement: eleRef.current,
+      }));
+      return <div ref={eleRef} className="bamboo" />;
+    });
+
+    const onMutate = jest.fn();
+
+    const { container } = render(
+      <MutateObserver onMutate={onMutate}>
+        <Demo />
+      </MutateObserver>,
+    );
+
+    expect(global.mutateTargetElement).toBe(container.querySelector('.bamboo'));
   });
 });
