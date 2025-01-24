@@ -1,4 +1,4 @@
-import { getDOM } from '@rc-component/util/lib/DOM/findDOMNode';
+import { getDOM } from '@rc-component/util/lib/Dom/findDOMNode';
 import useEvent from '@rc-component/util/lib/hooks/useEvent';
 import useLayoutEffect from '@rc-component/util/lib/hooks/useLayoutEffect';
 import {
