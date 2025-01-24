@@ -1,8 +1,8 @@
 import React from 'react';
-import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
-import { supportRef, useComposeRef } from 'rc-util/lib/ref';
-import findDOMNode from 'rc-util/lib/Dom/findDOMNode';
-import useEvent from 'rc-util/lib/hooks/useEvent';
+import useLayoutEffect from '@rc-component/util/lib/hooks/useLayoutEffect';
+import { supportRef, useComposeRef } from '@rc-component/util/lib/ref';
+import findDOMNode from '@rc-component/util/lib/Dom/findDOMNode';
+import useEvent from '@rc-component/util/lib/hooks/useEvent';
 import DomWrapper from './wrapper';
 import type { MutationObserverProps } from './interface';
 import useMutateObserver from './useMutateObserver';
@@ -46,7 +46,7 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
   return (
     <DomWrapper ref={wrapperRef}>
       {canRef
-        ? React.cloneElement(children as any, { ref: mergedRef })
+        ? React.cloneElement<any>(children, { ref: mergedRef })
         : children}
     </DomWrapper>
   );
