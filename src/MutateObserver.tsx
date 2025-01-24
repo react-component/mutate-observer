@@ -1,9 +1,12 @@
-import React from 'react';
-import useLayoutEffect from '@rc-component/util/lib/hooks/useLayoutEffect';
-import { supportRef, useComposeRef } from '@rc-component/util/lib/ref';
-import findDOMNode from '@rc-component/util/lib/Dom/findDOMNode';
+import { getDOM } from '@rc-component/util/lib/Dom/findDOMNode';
 import useEvent from '@rc-component/util/lib/hooks/useEvent';
-import DomWrapper from './wrapper';
+import useLayoutEffect from '@rc-component/util/lib/hooks/useLayoutEffect';
+import {
+  getNodeRef,
+  supportNodeRef,
+  useComposeRef,
+} from '@rc-component/util/lib/ref';
+import React from 'react';
 import type { MutationObserverProps } from './interface';
 import useMutateObserver from './useMutateObserver';
 
@@ -12,28 +15,23 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
 
   const callback = useEvent(onMutate);
 
-  const wrapperRef = React.useRef<DomWrapper>(null);
+  const elementRef = React.useRef<HTMLElement | SVGElement>(null);
 
-  const elementRef = React.useRef<HTMLElement>(null);
+  const canRef = supportNodeRef(children);
 
-  const canRef = React.isValidElement(children) && supportRef(children);
+  const mergedRef = useComposeRef(elementRef, getNodeRef(children));
 
-  const mergedRef = useComposeRef(
-    elementRef,
-    canRef ? (children as any).ref : null,
-  );
-
-  const [target, setTarget] = React.useState<HTMLElement>(null);
+  const [target, setTarget] = React.useState<HTMLElement | SVGElement>(null);
 
   useMutateObserver(target, callback, options);
 
   // =========================== Effect ===========================
-  // Bind target
   useLayoutEffect(() => {
-    setTarget(
-      findDOMNode(elementRef.current) || findDOMNode(wrapperRef.current),
-    );
-  });
+    // Set target based on the refs
+    if (canRef && elementRef.current) {
+      setTarget(getDOM(elementRef.current));
+    }
+  }, [canRef]);
 
   // =========================== Render ===========================
   if (!children) {
@@ -43,13 +41,9 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
     return null;
   }
 
-  return (
-    <DomWrapper ref={wrapperRef}>
-      {canRef
-        ? React.cloneElement<any>(children, { ref: mergedRef })
-        : children}
-    </DomWrapper>
-  );
+  return canRef
+    ? React.cloneElement<any>(children, { ref: mergedRef })
+    : children;
 };
 
 export default MutateObserver;
