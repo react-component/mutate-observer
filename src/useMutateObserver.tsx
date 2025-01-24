@@ -1,5 +1,5 @@
-import canUseDom from 'rc-util/lib/Dom/canUseDom';
-import * as React from 'react';
+import canUseDom from '@rc-component/util/lib/Dom/canUseDom';
+import React from 'react';
 
 const defaultOptions: MutationObserverInit = {
   subtree: true,
@@ -7,11 +7,11 @@ const defaultOptions: MutationObserverInit = {
   attributeFilter: ['style', 'class'],
 };
 
-export default function useMutateObserver(
-  nodeOrList: HTMLElement | HTMLElement[],
+const useMutateObserver = (
+  nodeOrList: HTMLElement | HTMLElement[] | SVGElement | SVGElement[],
   callback: MutationCallback,
   options: MutationObserverInit = defaultOptions,
-) {
+) => {
   React.useEffect(() => {
     if (!canUseDom() || !nodeOrList) {
       return;
@@ -33,4 +33,6 @@ export default function useMutateObserver(
       instance?.disconnect();
     };
   }, [options, nodeOrList]);
-}
+};
+
+export default useMutateObserver;

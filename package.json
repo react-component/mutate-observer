@@ -1,6 +1,6 @@
 {
   "name": "@rc-component/mutate-observer",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "React MutateObserver Component",
   "keywords": [
     "react",
@@ -43,18 +43,19 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.0",
-    "classnames": "^2.3.2",
-    "rc-util": "^5.24.4"
+    "@rc-component/util": "^1.2.0",
+    "classnames": "^2.3.2"
   },
   "devDependencies": {
     "@rc-component/father-plugin": "^1.0.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.0",
     "@types/jest": "^26.0.20",
-    "@types/node": "^20.9.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/node": "^22.10.7",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
     "@umijs/fabric": "^3.0.0",
+    "cheerio": "1.0.0-rc.12",
     "dumi": "^2.0.0",
     "eslint": "^8.54.0",
     "eslint-plugin-jest": "^27.6.0",
@@ -67,7 +68,6 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "typescript": "^5.0.0",
-    "cheerio": "1.0.0-rc.12",
     "umi-test": "^1.9.7"
   },
   "peerDependencies": {
