@@ -1,4 +1,4 @@
-import canUseDom from '@rc-component/util/lib/Dom/canUseDom';
+import { canUseDom } from '@rc-component/util';
 import React from 'react';
 
 const defaultOptions: MutationObserverInit = {
