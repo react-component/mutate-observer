@@ -1,10 +1,10 @@
-import { getDOM } from '@rc-component/util';
-import { useEvent } from '@rc-component/util';
-import { useLayoutEffect } from '@rc-component/util';
 import {
+  getDOM,
   getNodeRef,
   supportNodeRef,
   useComposeRef,
+  useEvent,
+  useLayoutEffect,
 } from '@rc-component/util';
 import React from 'react';
 import type { MutationObserverProps } from './interface';
