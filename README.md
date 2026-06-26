@@ -116,17 +116,15 @@ npm run build
 
 ## Release
 
-The package is published with [`@rc-component/np`](https://github.com/react-component/np):
-
 ```bash
 npm run prepublishOnly
 ```
 
-This runs the package build before the release helper.
+The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
 
 ## License
 
-`@rc-component/mutate-observer` is released under the MIT license.
+@rc-component/mutate-observer is released under the [MIT](./LICENSE) license.
 
 [npm-image]: https://img.shields.io/npm/v/@rc-component/mutate-observer.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@rc-component/mutate-observer
