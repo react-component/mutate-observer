@@ -28,7 +28,7 @@
   "scripts": {
     "build": "npm run docs:build",
     "compile": "father build",
-    "deploy": "npm run docs:build && npm run docs:deploy",
+    "deploy": "npm run gh-pages",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
     "gh-pages": "GH_PAGES=1 npm run docs:build && npm run docs:deploy",
