@@ -1,5 +1,5 @@
-import MutateObserver from '../../src';
 import React, { useCallback } from 'react';
+import MutateObserver from '../../src';
 
 const App: React.FC = () => {
   const [flag, setFlag] = React.useState<boolean>(true);

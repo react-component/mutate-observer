@@ -1,7 +1,9 @@
-# @rc-component/mutate-observer
+<div align="center">
+  <h1>@rc-component/mutate-observer</h1>
+  <p>👁️ React wrapper and hook for observing DOM mutations with a typed MutationObserver API.</p>
+</div>
 
-MutateObserver for React.
-
+<div align="center">
 
 [![NPM version][npm-image]][npm-url]
 [![npm download][download-image]][download-url]
@@ -10,64 +12,130 @@ MutateObserver for React.
 [![bundle size][bundlephobia-image]][bundlephobia-url]
 [![dumi][dumi-image]][dumi-url]
 
+</div>
+
+<div align="center">
+  <sub>
+    Part of the <a href="https://ant.design">Ant Design</a> ecosystem
+    <img
+      alt="Ant Design"
+      height="14"
+      src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+    />
+  </sub>
+</div>
+
+## Highlights
+
+- Component and hook APIs for observing changes to a rendered DOM node.
+- Passes `MutationRecord[]` and the native `MutationObserver` instance to `onMutate`.
+- Supports the full native `MutationObserverInit` options object.
+- TypeScript definitions for component props and hook usage.
+- Used by Ant Design as a small DOM observation primitive.
+
+## Install
+
+```bash
+npm install @rc-component/mutate-observer
+```
+
+## Usage
+
+```tsx | pure
+import MutateObserver from '@rc-component/mutate-observer';
+import React from 'react';
+
+export default () => (
+  <MutateObserver
+    options={{ attributes: true, childList: true, subtree: true }}
+    onMutate={(mutations, observer) => {
+      console.log(mutations);
+      console.log(observer);
+    }}
+  >
+    <div>Observed content</div>
+  </MutateObserver>
+);
+```
+
+```tsx | pure
+import { useMutateObserver } from '@rc-component/mutate-observer';
+import React, { useState } from 'react';
+
+export default () => {
+  const [target, setTarget] = useState<HTMLDivElement | null>(null);
+
+  useMutateObserver(target, mutations => {
+    console.log(mutations);
+  });
+
+  return <div ref={setTarget}>Observed content</div>;
+};
+```
+
+## Examples
+
+Run the examples locally:
+
+```bash
+npm install
+npm start
+```
+
+Then open the dumi dev server in your browser.
+
+## API
+
+### MutateObserver
+
+| Property | Type                                                                | Default | Description                                                               |
+| -------- | ------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------- |
+| children | `React.ReactNode`                                                   | -       | Node to render and observe.                                               |
+| options  | `MutationObserverInit`                                              | -       | Native observer options such as `attributes`, `childList`, and `subtree`. |
+| onMutate | `(mutations: MutationRecord[], observer: MutationObserver) => void` | -       | Triggered when observed mutations are reported.                           |
+
+### useMutateObserver
+
+```ts
+useMutateObserver(target, callback, options);
+```
+
+The hook observes the provided target element or element array with the same callback and native `MutationObserverInit` options used by the component.
+
+## Development
+
+```bash
+npm install
+npm start
+npm test
+npm run tsc
+npm run compile
+npm run build
+```
+
+## Release
+
+The package is published with [`@rc-component/np`](https://github.com/react-component/np):
+
+```bash
+npm run prepublishOnly
+```
+
+This runs the package build before the release helper.
+
+## License
+
+`@rc-component/mutate-observer` is released under the MIT license.
+
 [npm-image]: https://img.shields.io/npm/v/@rc-component/mutate-observer.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/@rc-component/mutate-observer
-[github-actions-image]: https://github.com/react-component/mutate-observer/actions/workflows/main.yml/badge.svg
-[github-actions-url]: https://github.com/react-component/mutate-observer/actions/workflows/main.yml
+[npm-url]: https://npmjs.org/package/@rc-component/mutate-observer
+[github-actions-image]: https://github.com/react-component/mutate-observer/actions/workflows/react-component-ci.yml/badge.svg
+[github-actions-url]: https://github.com/react-component/mutate-observer/actions/workflows/react-component-ci.yml
 [codecov-image]: https://img.shields.io/codecov/c/github/react-component/mutate-observer/master.svg?style=flat-square
 [codecov-url]: https://app.codecov.io/gh/react-component/mutate-observer
-[david-url]: https://david-dm.org/react-component/mutate-observer
-[david-image]: https://david-dm.org/react-component/mutate-observer/status.svg?style=flat-square
-[david-dev-url]: https://david-dm.org/react-component/mutate-observer?type=dev
-[david-dev-image]: https://david-dm.org/react-component/mutate-observer/dev-status.svg?style=flat-square
 [download-image]: https://img.shields.io/npm/dm/@rc-component/mutate-observer.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@rc-component/mutate-observer
 [bundlephobia-url]: https://bundlephobia.com/package/@rc-component/mutate-observer
 [bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@rc-component/mutate-observer
 [dumi-url]: https://github.com/umijs/dumi
 [dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
-
-## Development
-
-```bash
-npm install
-npm run start
-open http://localhost:8000
-```
-
-## Install
-
-[![@rc-component/mutate-observer](https://nodei.co/npm/@rc-component/mutate-observer.png)](https://www.npmjs.com/package/@rc-component/mutate-observer)
-
-## Usage
-
-```tsx | pure
-import React from 'react';
-import MutateObserver from 'rc-component/mutate-observer';
-
-const onMutate = (mutations: MutationRecord[], observer: MutationObserver) => {
-  console.log(mutation);
-  console.log(observer);
-};
-
-const Demo: React.FC = () => {
-  return (
-    <MutateObserver onMutate={onMutate}>
-      <div>test</div>
-    </MutateObserver>
-  );
-};
-
-export default Demo;
-```
-
-## 🔥 API
-
-We use typescript to create the Type definition. You can view directly in IDE. But you can still check the type definition [here](https://github.com/react-component/mutate-observer/blob/master/src/interface.ts).
-
-### mutate-observer
-
-| Prop     | Description                                                                                                      | Type                 | Default |
-| -------- | ---------------------------------------------------------------------------------------------------------------- | -------------------- | ------- |
-| onMutate | A function which will be called on each DOM change that qualifies given the observed node or subtree and options | MutationCallback     | -       |
-| options  | An object providing options that describe which DOM mutations should be reported to mutationObserver's callback  | MutationObserverInit | -       |

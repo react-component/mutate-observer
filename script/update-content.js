@@ -23,12 +23,12 @@ nav:
 <code src="../examples/${name}.tsx"></code>
 `,
     'utf8',
-    function(error) {
-      if(error){
+    function (error) {
+      if (error) {
         console.log(error);
         return false;
       }
       console.log(`${name} 更新成功~`);
-    }
-  )
+    },
+  );
 });
