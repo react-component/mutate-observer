@@ -1,11 +1,11 @@
 <div align="center">
   <h1>@rc-component/mutate-observer</h1>
-  <p><sub>Part of the Ant Design ecosystem.</sub></p>
+  <p><sub>Ant Design 生态的一部分。</sub></p>
   <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
-  <p>👁️ React wrapper and hook for observing DOM mutations with a typed MutationObserver API.</p>
+  <p>👁️ 轻量 React DOM 变更观察组件。</p>
 </div>
 
-<p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="./README.md">English</a> | 简体中文</p>
 
 
 <div align="center">
@@ -20,21 +20,21 @@
 </div>
 
 
-## Highlights
+## 特性
 
 - Component and hook APIs for observing changes to a rendered DOM node.
 - Passes `MutationRecord[]` and the native `MutationObserver` instance to `onMutate`.
-- Supports the full native `MutationObserverInit` options object.
+- 支持 the full native `MutationObserverInit` options object.
 - TypeScript definitions for component props and hook usage.
-- Used by Ant Design as a small DOM observation primitive.
+- 被 Ant Design 使用 as a small DOM observation primitive.
 
-## Install
+## 安装
 
 ```bash
 npm install @rc-component/mutate-observer
 ```
 
-## Usage
+## 使用
 
 ```tsx | pure
 import MutateObserver from '@rc-component/mutate-observer';
@@ -63,22 +63,22 @@ export default ({ target }: { target: HTMLDivElement | null }) => {
 };
 ```
 
-## Examples
+## 示例
 
-Run the examples locally:
+本地运行示例：
 
 ```bash
 npm install
 npm start
 ```
 
-Then open the dumi dev server in your browser.
+然后在浏览器中打开 dumi 开发服务地址。
 
 ## API
 
 ### MutateObserver
 
-| Property | Type                                                                | Default | Description                                                               |
+| 参数 | 类型                                                                | 默认值 | 说明                                                               |
 | -------- | ------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------- |
 | children | `React.ReactNode`                                                   | -       | Node to render and observe.                                               |
 | options  | `MutationObserverInit`                                              | -       | Native observer options such as `attributes`, `childList`, and `subtree`. |
@@ -92,7 +92,7 @@ useMutateObserver(target, callback, options);
 
 The hook observes the provided target element or element array with the same callback and native `MutationObserverInit` options used by the component.
 
-## Development
+## 本地开发
 
 ```bash
 npm install
@@ -103,7 +103,7 @@ npm run compile
 npm run build
 ```
 
-## Release
+## 发布
 
 ```bash
 npm run prepublishOnly
@@ -111,7 +111,7 @@ npm run prepublishOnly
 
 The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
 
-## License
+## 许可证
 
 @rc-component/mutate-observer is released under the [MIT](./LICENSE) license.
 
