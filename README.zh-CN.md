@@ -1,7 +1,6 @@
 <div align="center">
   <h1>@rc-component/mutate-observer</h1>
-  <p><sub>Ant Design 生态的一部分。</sub></p>
-  <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Ant Design 生态的一部分。</sub></p>
   <p>👁️ 轻量 React DOM 变更观察组件。</p>
 </div>
 
@@ -22,11 +21,11 @@
 
 ## 特性
 
-- Component and hook APIs for observing changes to a rendered DOM node.
-- Passes `MutationRecord[]` and the native `MutationObserver` instance to `onMutate`.
-- 支持 the full native `MutationObserverInit` options object.
-- TypeScript definitions for component props and hook usage.
-- 被 Ant Design 使用 as a small DOM observation primitive.
+- 用于观察渲染的 DOM 节点变化的组件和钩子 API。
+- 将 `MutationRecord[]` 和本机 `MutationObserver` 实例传递给 `onMutate`。
+- 支持完整的本机 `MutationObserverInit` 选项对象。
+- 组件 props 和 hook 用法的 TypeScript 定义。
+- 被 Ant Design 用作小型 DOM 观察原语。
 
 ## 安装
 
@@ -80,9 +79,9 @@ npm start
 
 | 参数 | 类型                                                                | 默认值 | 说明                                                               |
 | -------- | ------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------- |
-| children | `React.ReactNode`                                                   | -       | Node to render and observe.                                               |
-| options  | `MutationObserverInit`                                              | -       | Native observer options such as `attributes`, `childList`, and `subtree`. |
-| onMutate | `(mutations: MutationRecord[], observer: MutationObserver) => void` | -       | Triggered when observed mutations are reported.                           |
+| children们 | `React.ReactNode`                                                   | -       | 要渲染和观察的节点。                                               |
+| 选项  | `MutationObserverInit`                                              | -       | 本机观察者选项，例如 `attributes`、`childList` 和 `subtree`。 |
+| onMutate | `(mutations: MutationRecord[], observer: MutationObserver) => void` | -       | 当报告观察到的突变时触发。                           |
 
 ### useMutateObserver
 
@@ -90,7 +89,7 @@ npm start
 useMutateObserver(target, callback, options);
 ```
 
-The hook observes the provided target element or element array with the same callback and native `MutationObserverInit` options used by the component.
+该 Hook 会用与组件相同的回调和原生 `MutationObserverInit` 配置监听目标元素或元素数组。
 
 ## 本地开发
 
@@ -109,11 +108,11 @@ npm run build
 npm run prepublishOnly
 ```
 
-The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
+包构建完成后，发布流程由 `@rc-component/np` 通过 `rc-np` 命令处理。
 
 ## 许可证
 
-@rc-component/mutate-observer is released under the [MIT](./LICENSE) license.
+@rc-component/mutate-observer 基于 [MIT](./LICENSE) 许可证发布。
 
 [npm-image]: https://img.shields.io/npm/v/@rc-component/mutate-observer.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@rc-component/mutate-observer
