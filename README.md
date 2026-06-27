@@ -1,17 +1,10 @@
 <div align="center">
   <h1>@rc-component/mutate-observer</h1>
+  <p><sub>Part of the Ant Design ecosystem.</sub></p>
   <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/bmw-prod/ae669a89-0c24-40ff-a91d-2b83497170f6.svg" />
   <p>👁️ React wrapper and hook for observing DOM mutations with a typed MutationObserver API.</p>
 </div>
 
-<p align="center">
-  <sub>
-    <a href="https://ant.design">
-      <img alt="Ant Design" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" height="16">
-    </a>
-    Part of the Ant Design ecosystem.
-  </sub>
-</p>
 
 <div align="center">
 
@@ -53,8 +46,6 @@ npm install @rc-component/mutate-observer
 
 ```tsx | pure
 import MutateObserver from '@rc-component/mutate-observer';
-import React from 'react';
-
 export default () => (
   <MutateObserver
     options={{ attributes: true, childList: true, subtree: true }}
@@ -70,16 +61,13 @@ export default () => (
 
 ```tsx | pure
 import { useMutateObserver } from '@rc-component/mutate-observer';
-import React, { useState } from 'react';
 
-export default () => {
-  const [target, setTarget] = useState<HTMLDivElement | null>(null);
-
+export default ({ target }: { target: HTMLDivElement | null }) => {
   useMutateObserver(target, mutations => {
     console.log(mutations);
   });
 
-  return <div ref={setTarget}>Observed content</div>;
+  return <div>Observed content</div>;
 };
 ```
 
