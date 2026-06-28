@@ -79,8 +79,8 @@ npm start
 
 | 参数 | 类型                                                                | 默认值 | 说明                                                               |
 | -------- | ------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------- |
-| children们 | `React.ReactNode`                                                   | -       | 要渲染和观察的节点。                                               |
-| 选项  | `MutationObserverInit`                                              | -       | 本机观察者选项，例如 `attributes`、`childList` 和 `subtree`。 |
+| children | `React.ReactNode` | - | 要渲染和观察的节点。 |
+| options | `MutationObserverInit` | - | 本机观察者选项，例如 `attributes`、`childList` 和 `subtree`。 |
 | onMutate | `(mutations: MutationRecord[], observer: MutationObserver) => void` | -       | 当报告观察到的突变时触发。                           |
 
 ### useMutateObserver
