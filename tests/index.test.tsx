@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import MutateObserver from '../src';
 
@@ -15,7 +15,7 @@ describe('MutateObserver', () => {
     global.mutateTargetElement = null;
   });
 
-  it('MutateObserver should support onMutate', () => {
+  it('MutateObserver should support onMutate', async () => {
     const fn = jest.fn();
     const Demo: React.FC = () => {
       const [flag, setFlag] = React.useState<boolean>(true);
@@ -37,7 +37,9 @@ describe('MutateObserver', () => {
 
     // Check if the callback was triggered
     if ('MutationObserver' in window) {
-      expect(fn).toHaveBeenCalled();
+      await waitFor(() => {
+        expect(fn).toHaveBeenCalled();
+      });
     } else {
       expect(fn).not.toHaveBeenCalled();
     }
