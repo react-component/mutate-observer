@@ -19,7 +19,6 @@
   "author": "574980606@qq.com",
   "main": "./lib/index",
   "module": "./es/index",
-  "typings": "es/index.d.ts",
   "files": [
     "lib",
     "es",
@@ -85,5 +84,6 @@
   },
   "lint-staged": {
     "*": "prettier --write --ignore-unknown"
-  }
+  },
+  "types": "./es/index.d.ts"
 }
