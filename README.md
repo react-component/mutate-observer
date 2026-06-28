@@ -2,22 +2,18 @@
   <h1>@rc-component/mutate-observer</h1>
   <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Part of the Ant Design ecosystem.</sub></p>
   <p>👁️ React wrapper and hook for observing DOM mutations with a typed MutationObserver API.</p>
+
+  <p>
+    <a href="https://npmjs.org/package/@rc-component/mutate-observer"><img alt="NPM version" src="https://img.shields.io/npm/v/@rc-component/mutate-observer.svg?style=flat-square"></a>
+    <a href="https://npmjs.org/package/@rc-component/mutate-observer"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@rc-component/mutate-observer.svg?style=flat-square"></a>
+    <a href="https://github.com/react-component/mutate-observer/actions/workflows/react-component-ci.yml"><img alt="build status" src="https://github.com/react-component/mutate-observer/actions/workflows/react-component-ci.yml/badge.svg"></a>
+    <a href="https://app.codecov.io/gh/react-component/mutate-observer"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/react-component/mutate-observer/master.svg?style=flat-square"></a>
+    <a href="https://bundlephobia.com/package/@rc-component/mutate-observer"><img alt="bundle size" src="https://badgen.net/bundlephobia/minzip/@rc-component/mutate-observer"></a>
+    <a href="https://github.com/umijs/dumi"><img alt="dumi" src="https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square"></a>
+  </p>
 </div>
 
 <p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
-
-
-<div align="center">
-
-[![NPM version][npm-image]][npm-url]
-[![npm download][download-image]][download-url]
-[![build status][github-actions-image]][github-actions-url]
-[![Codecov][codecov-image]][codecov-url]
-[![bundle size][bundlephobia-image]][bundlephobia-url]
-[![dumi][dumi-image]][dumi-url]
-
-</div>
-
 
 ## Highlights
 
@@ -115,16 +111,3 @@ The release flow is handled by `@rc-component/np` through the `rc-np` command af
 ## License
 
 @rc-component/mutate-observer is released under the [MIT](./LICENSE) license.
-
-[npm-image]: https://img.shields.io/npm/v/@rc-component/mutate-observer.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/@rc-component/mutate-observer
-[github-actions-image]: https://github.com/react-component/mutate-observer/actions/workflows/react-component-ci.yml/badge.svg
-[github-actions-url]: https://github.com/react-component/mutate-observer/actions/workflows/react-component-ci.yml
-[codecov-image]: https://img.shields.io/codecov/c/github/react-component/mutate-observer/master.svg?style=flat-square
-[codecov-url]: https://app.codecov.io/gh/react-component/mutate-observer
-[download-image]: https://img.shields.io/npm/dm/@rc-component/mutate-observer.svg?style=flat-square
-[download-url]: https://npmjs.org/package/@rc-component/mutate-observer
-[bundlephobia-url]: https://bundlephobia.com/package/@rc-component/mutate-observer
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@rc-component/mutate-observer
-[dumi-url]: https://github.com/umijs/dumi
-[dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
