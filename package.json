@@ -7,7 +7,7 @@
     "react-component",
     "mutate-observer"
   ],
-  "homepage": "https://github.com/react-component/mutate-observer",
+  "homepage": "https://react-component.github.io/mutate-observer",
   "bugs": {
     "url": "https://github.com/react-component/mutate-observer/issues"
   },
@@ -77,5 +77,8 @@
   },
   "engines": {
     "node": ">=8.x"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
