@@ -8,7 +8,13 @@ const defaultOptions: MutationObserverInit = {
 };
 
 const useMutateObserver = (
-  nodeOrList: HTMLElement | HTMLElement[] | SVGElement | SVGElement[],
+  nodeOrList:
+    | HTMLElement
+    | HTMLElement[]
+    | SVGElement
+    | SVGElement[]
+    | null
+    | undefined,
   callback: MutationCallback,
   options: MutationObserverInit = defaultOptions,
 ) => {

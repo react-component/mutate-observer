@@ -1,7 +1,7 @@
 <div align="center">
   <h1>@rc-component/mutate-observer</h1>
-  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Part of the Ant Design ecosystem.</sub></p>
-  <p>👁️ React wrapper and hook for observing DOM mutations with a typed MutationObserver API.</p>
+  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Ant Design 生态的一部分。</sub></p>
+  <p>👁️ 轻量 React DOM 变更观察组件。</p>
 
   <p>
     <a href="https://npmjs.org/package/@rc-component/mutate-observer"><img alt="NPM version" src="https://img.shields.io/npm/v/@rc-component/mutate-observer.svg?style=flat-square"></a>
@@ -13,23 +13,23 @@
   </p>
 </div>
 
-<p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="./README.md">English</a> | 简体中文</p>
 
-## Highlights
+## 特性
 
-- Component and hook APIs for observing changes to a rendered DOM node.
-- Passes `MutationRecord[]` and the native `MutationObserver` instance to `onMutate`.
-- Supports the full native `MutationObserverInit` options object.
-- TypeScript definitions for component props and hook usage.
-- Used by Ant Design as a small DOM observation primitive.
+- 用于观察渲染的 DOM 节点变化的组件和钩子 API。
+- 将 `MutationRecord[]` 和本机 `MutationObserver` 实例传递给 `onMutate`。
+- 支持完整的本机 `MutationObserverInit` 选项对象。
+- 组件 props 和 hook 用法的 TypeScript 定义。
+- 被 Ant Design 用作小型 DOM 观察原语。
 
-## Install
+## 安装
 
 ```bash
 npm install @rc-component/mutate-observer
 ```
 
-## Usage
+## 使用
 
 ```tsx | pure
 import MutateObserver from '@rc-component/mutate-observer';
@@ -58,26 +58,26 @@ export default ({ target }: { target: HTMLDivElement | null }) => {
 };
 ```
 
-## Examples
+## 示例
 
-Run the local dumi site:
+运行本地 dumi 站点：
 
 ```bash
 npm install
 npm start
 ```
 
-Then open `http://localhost:8000`.
+然后打开 `http://localhost:8000`。
 
 ## API
 
 ### MutateObserver
 
-| Property | Type                                                                | Default | Description                                                               |
+| 参数 | 类型                                                                | 默认值 | 说明                                                               |
 | -------- | ------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------- |
-| children | `React.ReactNode`                                                   | -       | Node to render and observe.                                               |
-| options  | `MutationObserverInit`                                              | -       | Native observer options such as `attributes`, `childList`, and `subtree`. |
-| onMutate | `(mutations: MutationRecord[], observer: MutationObserver) => void` | -       | Triggered when observed mutations are reported.                           |
+| children | `React.ReactNode` | - | 要渲染和观察的节点。 |
+| options | `MutationObserverInit` | - | 本机观察者选项，例如 `attributes`、`childList` 和 `subtree`。 |
+| onMutate | `(mutations: MutationRecord[], observer: MutationObserver) => void` | -       | 当报告观察到的突变时触发。                           |
 
 ### useMutateObserver
 
@@ -85,9 +85,9 @@ Then open `http://localhost:8000`.
 useMutateObserver(target, callback, options);
 ```
 
-The hook observes the provided target element or element array with the same callback and native `MutationObserverInit` options used by the component.
+该 Hook 会用与组件相同的回调和原生 `MutationObserverInit` 配置监听目标元素或元素数组。
 
-## Development
+## 本地开发
 
 ```bash
 npm install
@@ -98,16 +98,16 @@ npm run compile
 npm run build
 ```
 
-The dumi site runs at `http://localhost:8000` by default.
+dumi 站点默认运行在 `http://localhost:8000`。
 
-## Release
+## 发布
 
 ```bash
 npm run prepublishOnly
 ```
 
-The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
+包构建完成后，发布流程由 `@rc-component/np` 通过 `rc-np` 命令处理。
 
-## License
+## 许可证
 
-@rc-component/mutate-observer is released under the [MIT](./LICENSE) license.
+@rc-component/mutate-observer 基于 [MIT](./LICENSE) 许可证发布。

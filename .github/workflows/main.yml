@@ -1,8 +1,0 @@
-name: ✅ test
-
-on: ['push', 'pull_request']
-
-jobs:
-  CI:
-    uses: react-component/rc-test/.github/workflows/test.yml@main
-    secrets: inherit
