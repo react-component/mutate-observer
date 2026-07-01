@@ -63,7 +63,7 @@ export default ({ target }: { target: HTMLDivElement | null }) => {
 运行本地 dumi 站点：
 
 ```bash
-ut install
+npm install
 npm start
 ```
 
@@ -90,7 +90,7 @@ useMutateObserver(target, callback, options);
 ## 本地开发
 
 ```bash
-ut install
+npm install
 npm start
 npm test
 npm run tsc
