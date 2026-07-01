@@ -63,7 +63,7 @@ export default ({ target }: { target: HTMLDivElement | null }) => {
 Run the local dumi site:
 
 ```bash
-npm install
+ut install
 npm start
 ```
 
@@ -90,7 +90,7 @@ The hook observes the provided target element or element array with the same cal
 ## Development
 
 ```bash
-npm install
+ut install
 npm start
 npm test
 npm run tsc
