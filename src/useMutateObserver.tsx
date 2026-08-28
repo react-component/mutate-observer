@@ -1,4 +1,4 @@
-import { canUseDom } from '@rc-component/util';
+import { canUseDom, useEvent } from '@rc-component/util';
 import React from 'react';
 
 const defaultOptions: MutationObserverInit = {
@@ -9,15 +9,12 @@ const defaultOptions: MutationObserverInit = {
 
 const useMutateObserver = (
   nodeOrList:
-    | HTMLElement
-    | HTMLElement[]
-    | SVGElement
-    | SVGElement[]
-    | null
-    | undefined,
+    HTMLElement | HTMLElement[] | SVGElement | SVGElement[] | null | undefined,
   callback: MutationCallback,
   options: MutationObserverInit = defaultOptions,
 ) => {
+  const mergedCallback = useEvent(callback);
+
   React.useEffect(() => {
     if (!canUseDom() || !nodeOrList) {
       return;
@@ -28,7 +25,7 @@ const useMutateObserver = (
     const nodeList = Array.isArray(nodeOrList) ? nodeOrList : [nodeOrList];
 
     if ('MutationObserver' in window) {
-      instance = new MutationObserver(callback);
+      instance = new MutationObserver(mergedCallback);
 
       nodeList.forEach(element => {
         instance.observe(element, options);
@@ -38,7 +35,7 @@ const useMutateObserver = (
       instance?.takeRecords();
       instance?.disconnect();
     };
-  }, [options, nodeOrList]);
+  }, [options, nodeOrList, mergedCallback]);
 };
 
 export default useMutateObserver;

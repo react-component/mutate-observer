@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
-import MutateObserver from '../src';
+import MutateObserver, { useMutateObserver } from '../src';
 
 jest.mock('../src/useMutateObserver', () => {
   const origin = jest.requireActual('../src/useMutateObserver').default;
@@ -109,5 +109,26 @@ describe('MutateObserver', () => {
     );
 
     expect(global.mutateTargetElement).toBe(container.querySelector('.bamboo'));
+  });
+
+  it('should use the latest mutation callback', async () => {
+    const target = document.createElement('div');
+    const firstCallback = jest.fn();
+    const latestCallback = jest.fn();
+
+    const Demo: React.FC<{ callback: MutationCallback }> = ({ callback }) => {
+      useMutateObserver(target, callback);
+      return null;
+    };
+
+    const { rerender } = render(<Demo callback={firstCallback} />);
+
+    rerender(<Demo callback={latestCallback} />);
+    target.className = 'updated';
+
+    await waitFor(() => {
+      expect(latestCallback).toHaveBeenCalledTimes(1);
+    });
+    expect(firstCallback).not.toHaveBeenCalled();
   });
 });
