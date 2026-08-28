@@ -115,20 +115,37 @@ describe('MutateObserver', () => {
     const target = document.createElement('div');
     const firstCallback = jest.fn();
     const latestCallback = jest.fn();
+    const NativeMutationObserver = window.MutationObserver;
+    const observerInstances: MutationObserver[] = [];
+    const observerConstructor = jest
+      .spyOn(window, 'MutationObserver')
+      .mockImplementation(callback => {
+        const instance = new NativeMutationObserver(callback);
+        observerInstances.push(instance);
+        return instance;
+      });
 
     const Demo: React.FC<{ callback: MutationCallback }> = ({ callback }) => {
       useMutateObserver(target, callback);
       return null;
     };
 
-    const { rerender } = render(<Demo callback={firstCallback} />);
+    const { rerender, unmount } = render(<Demo callback={firstCallback} />);
+    expect(observerConstructor).toHaveBeenCalledTimes(1);
+    const disconnect = jest.spyOn(observerInstances[0], 'disconnect');
 
     rerender(<Demo callback={latestCallback} />);
+    expect(observerConstructor).toHaveBeenCalledTimes(1);
+    expect(disconnect).not.toHaveBeenCalled();
     target.className = 'updated';
 
     await waitFor(() => {
       expect(latestCallback).toHaveBeenCalledTimes(1);
     });
     expect(firstCallback).not.toHaveBeenCalled();
+
+    unmount();
+    expect(disconnect).toHaveBeenCalledTimes(1);
+    observerConstructor.mockRestore();
   });
 });
