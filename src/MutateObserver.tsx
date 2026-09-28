@@ -1,5 +1,6 @@
 import {
   getDOM,
+  isReactRenderable,
   getNodeRef,
   supportNodeRef,
   useComposeRef,
@@ -34,7 +35,7 @@ const MutateObserver: React.FC<MutationObserverProps> = props => {
   }, [canRef]);
 
   // =========================== Render ===========================
-  if (!children) {
+  if (!isReactRenderable(children)) {
     if (process.env.NODE_ENV !== 'production') {
       console.error('MutationObserver need children props');
     }
