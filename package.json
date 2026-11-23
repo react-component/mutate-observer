@@ -43,7 +43,7 @@
     "watch": "father dev"
   },
   "dependencies": {
-    "@rc-component/util": "^1.11.1"
+    "@rc-component/util": "^1.13.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
